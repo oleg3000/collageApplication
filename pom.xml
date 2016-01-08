@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>collageApplication</artifactId>
+    <groupId>com.ok.collage</groupId>
+    <version>1.0</version>
+    <name>CollageApplication</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <swf>collageApplication</swf>
+        <host>localhost</host>
+        <flex.sdk.version>4.9.1.1447119</flex.sdk.version>
+		<flash.player.version>11.2</flash.player.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <profiles>
+    </profiles>
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+				<executions>
+					<execution>
+					  <id>installRobotlegs</id>
+					  <phase>validate</phase>
+					  <goals>
+						<goal>install-file</goal>
+					  </goals>
+					  <configuration>
+						<groupId>org.robotlegs</groupId>
+						<artifactId>robotlegs-framework</artifactId>
+						<version>1.5.2</version>
+						<file>_lib/robotlegs-framework-v1.5.2.swc </file>
+						<packaging>swc</packaging>			
+					  </configuration>
+					</execution>
+					<execution>
+					  <id>installGreensock</id>
+					  <phase>validate</phase>
+					  <goals>
+						<goal>install-file</goal>
+					  </goals>
+					  <configuration>
+						<groupId>com.greensock</groupId>
+						<artifactId>greensock</artifactId>
+						<version>1.2</version>
+						<file>_lib/greensock.swc </file>
+						<packaging>swc</packaging>			
+					  </configuration>
+					</execution>
+					<execution>
+					  <id>installSignal</id>
+					  <phase>validate</phase>
+					  <goals>
+						<goal>install-file</goal>
+					  </goals>
+					  <configuration>
+						<groupId>org.osflash</groupId>
+						<artifactId>as3-signals</artifactId>
+						<version>0.8</version>
+						<file>_lib/as3-signals.swc</file>
+						<packaging>swc</packaging>			
+					  </configuration>
+					</execution>
+					<execution>
+					  <id>installRobotlegsSignalsExtension</id>
+					  <phase>validate</phase>
+					  <goals>
+						<goal>install-file</goal>
+					  </goals>
+					  <configuration>
+						<groupId>org.robotlegs</groupId>
+						<artifactId>signals-extensions-CommandSignal</artifactId>
+						<version>1.2</version>
+						<file>_lib/signals-extensions-CommandSignal.swc</file>
+						<packaging>swc</packaging>			
+					  </configuration>
+					</execution>
+				</executions>
+            </plugin>	
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <id>Copy player related resources</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>_out/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>_html-template</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+				  <execution>
+					<id>Run URL in system browser.</id>
+					<phase>install</phase>
+					<configuration>
+					  <target>
+						<exec executable="start" vmlauncher="false">
+						  <arg line="_out/index.html"/>
+						</exec>
+					  </target>
+					</configuration>
+					<goals>
+					  <goal>run</goal>
+					</goals>
+				  </execution>
+				</executions>
+			</plugin>			
+		</plugins>
+    </build>
+	
+	<modules>
+        <module>Models</module>
+        <module>Signals</module>
+        <module>Services</module>
+        <module>Commands</module>
+        <module>Utils</module>
+        <module>CollageApplicationMain</module>
+    </modules>
+	
+	<repositories>
+		<repository>
+			<id>MavenCentral</id>
+			<name>Maven repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>MavenCentral</id>
+			<name>Maven repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+    </pluginRepositories>
+</project>
