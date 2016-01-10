@@ -21,6 +21,8 @@ public class ImageLoaderMaxService implements IImageProviderService{
 	[Inject]
 	public var imagesLoadedSignal: ImagesLoadedSignal;
 
+	//---------------------------------------
+
 	public function ImageLoaderMaxService()
 	{
 		init();

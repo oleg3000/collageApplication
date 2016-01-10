@@ -17,8 +17,15 @@ public class CollageView extends Sprite {
 	private const REMOVE_TWEEN_DURATION : Number = .25;
 	private const UPDATE_LOCATION_TWEEN_DURATION : Number = .5;
 
+
+	//---------------------------------------
+	//Signals
+	//---------------------------------------
+
 	public var removeImageAnimationCompleteSignal : Signal = new Signal(Bitmap);
 	public var stageResizedSignal : Signal = new Signal();
+
+	//---------------------------------------
 
 	public function CollageView()
 	{

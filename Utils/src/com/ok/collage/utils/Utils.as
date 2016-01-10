@@ -7,7 +7,8 @@ public class Utils {
 
 
 	/**
-	 * Creates a table to be used for displayObject allocation in collage-style
+	 * Creates a table to be used for displayObject allocation in collage-style.
+	 * Images are always fit either width or height
 	 * @param displayObjects - Vector/Array of DisplayObjects
 	 * @param areaWidth
 	 * @param areaHeight
@@ -15,6 +16,8 @@ public class Utils {
 	 */
 	public static function fillAreaByDisplayObjects (displayObjects : Vector.<DisplayObject>, areaWidth : Number, areaHeight : Number) : Vector.<Vector.<DisplayObjectTransformation>>
 	{
+		//Calculate height so that summary area be equal to given area
+
 		var proportionsSum : Number = 0;
 
 		displayObjects.forEach(function (image : DisplayObject, ...args) : void{
@@ -29,10 +32,13 @@ public class Utils {
 		//Fit height
 		displayObjectHeight = areaHeight / numRows;
 
+		//Copy and sort array
 		var sortedImages : Vector.<DisplayObject> = displayObjects.concat().sort(function (bitmap1 : DisplayObject, bitmap2 : DisplayObject) : int
 		{
 			return bitmap1.width / bitmap1.height > bitmap2.width / bitmap2.height ? 1 : -1;
 		});
+
+		//Allocate images so that each next image will be added to the shortest row. Images are sorted from widest to thinest
 
 		var rowWidths : Vector.<Number> = new Vector.<Number>(numRows);
 		var displayObjectsTable : Vector.<Vector.<DisplayObjectTransformation>> = new Vector.<Vector.<DisplayObjectTransformation>>(numRows);
@@ -80,10 +86,9 @@ public class Utils {
 			}
 		}
 
+		//Reduce scale to get rid of cropped areas
 		var additionalScale : Number = 1;
 
-
-		//Reduce scale to get rid of cropped areas
 		if (areaWidth < maxRowWidth)
 		{
 			additionalScale = areaWidth / maxRowWidth;
@@ -99,6 +104,11 @@ public class Utils {
 		return displayObjectsTable
 	}
 
+	/**
+	 * Converts any enumerable array of DisplayObjects to Vector.<DisplayObject>
+	 * @param array of Display objects
+	 * @return vector of DisplayObjects
+	 */
 	public static function convertToDisplayObjectsVector(array: *) : Vector.<DisplayObject>
 	{
 		const result : Vector.<DisplayObject> = new <DisplayObject>[];

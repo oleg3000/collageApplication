@@ -14,12 +14,17 @@ public class CollageViewMediator extends Mediator {
 	[Inject]
 	public var collageDataModel : CollageDataModel;
 
+	//---------------------------------------
+	//Signals
+	//---------------------------------------
 
 	[Inject]
 	public var createCollageSignal : CreateCollageSignal;
 
 	[Inject]
 	public var imageRemovedSignal : ImageRemovedSignal;
+
+	//---------------------------------------
 
 	public function CollageViewMediator()
 	{

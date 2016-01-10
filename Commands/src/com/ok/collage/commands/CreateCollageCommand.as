@@ -15,8 +15,15 @@ public class CreateCollageCommand extends SignalCommand {
 	[Inject]
 	public var collageDataModel : CollageDataModel;
 
+
+	//---------------------------------------
+	//Signals
+	//---------------------------------------
+
 	[Inject]
 	public var createCollageSignal : CreateCollageSignal;
+
+	//---------------------------------------
 
 	public function CreateCollageCommand()
 	{
